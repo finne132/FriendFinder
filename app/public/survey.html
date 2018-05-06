@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Quiz</title>
+    <!-- my local stylesheet -->
+    <link rel="stylesheet" type="text/css" href="app/public/style.css">
+    <!-- bootstrap -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+	
+		<h1>Take the Quiz</h1>
+		<hr>
+		<form role="form" id="survey">
+			<h2>Tell us about yourself first</h2>
+			<div class="form-group">
+				<label for="usr">Name: (Required)</label>
+				<input type="text" class="form-control" id="name">
+			</div>
+			<div class="form-group">
+				<label for="pic">Link your Photo: (URL Required)</label>
+				<input type="text" class="form-control" id="pic">
+			</div>
+			<hr>
+			<h2>Rate how strongly you agree with the following statements:</h2>
+			<div class="row col-xs-12 col-md-12 col-lg-12">
+				<h3>Question 1</h3>
+				<h4>I enjoy long walks in the park/White House Gardens</h4>
+				<div class="form-group col-xs-3">
+					<select class="form-control" id="quest1">
+						<option>1 (Fox and Friends is the only window I need to this world)</option>
+						<option>2 (Only if there's a press conference)</option>
+						<option>3 (At least no one can hear us out there)</option>
+						<option>4 (I could go for a walk)</option>
+						<option>5 (Let's hide from the press in the bushes)</option>
+					</select>
+				</div>
+			</div>
+			<button type="button" class="btn btn-success btn-block" id="submit">Choose my destiny</button>
+		    </form>
+         </div>
+    </body>
+</html>
