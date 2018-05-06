@@ -1,7 +1,7 @@
 # FriendFinder
 
 1. Setup 
-..* Clone the repository 
+.. Clone the repository 
 ..* Run npm install in the repository folder 
 ..* Run node server.js to start the server 
 ..* Open a browser and navigate to localhost:3000
