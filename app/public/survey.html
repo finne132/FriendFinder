@@ -15,10 +15,9 @@
 </head>
 <body>
 	<div class="container">
-	
 		<h1>Take the Quiz</h1>
 		<hr>
-		<form role="form" id="survey">
+		<form role="form" id="quiz">
 			<h2>Tell us about yourself first</h2>
 			<div class="form-group">
 				<label for="usr">Name: (Required)</label>
@@ -60,7 +59,7 @@
                 <h3>Question 3</h3>
                 <h4>How would you handle tough questions?</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest3">
                         <option>1 (Provide Alternative Facts)</option>
                         <option>2 (Completely change the topic)</option>
                         <option>3 (Just lie)</option>
@@ -73,7 +72,7 @@
                 <h3>Question 4</h3>
                 <h4>What is your favorite lunch?</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest4">
                         <option>1 (McDonald's)</option>
                         <option>2 (White House Mess)</option>
                         <option>3 (BBQ)</option>
@@ -86,7 +85,7 @@
                 <h3>Question 5</h3>
                 <h4>I like my steak well done, tough as leather without a trace of pink.</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest5">
                         <option>1 (Strongly Disagree)</option>
                         <option>2</option>
                         <option>3</option>
@@ -99,7 +98,7 @@
                 <h3>Question 6</h3>
                 <h4>I like my steak well done, tough as leather without a trace of pink.</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest6">
                         <option>1 (Strongly Disagree)</option>
                         <option>2</option>
                         <option>3</option>
@@ -112,7 +111,7 @@
                 <h3>Question 7</h3>
                 <h4>I like my steak well done, tough as leather without a trace of pink.</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest7">
                         <option>1 (Strongly Disagree)</option>
                         <option>2</option>
                         <option>3</option>
@@ -125,7 +124,7 @@
                 <h3>Question 8</h3>
                 <h4>I like my steak well done, tough as leather without a trace of pink.</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest8">
                         <option>1 (Strongly Disagree)</option>
                         <option>2</option>
                         <option>3</option>
@@ -138,7 +137,7 @@
                 <h3>Question 9</h3>
                 <h4>I like my steak well done, tough as leather without a trace of pink.</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest9">
                         <option>1 (Strongly Disagree)</option>
                         <option>2</option>
                         <option>3</option>
@@ -151,7 +150,7 @@
                 <h3>Question 10</h3>
                 <h4>I like my steak well done, tough as leather without a trace of pink.</h4>
                 <div class="form-group col-xs-3">
-                    <select class="form-control" id="quest2">
+                    <select class="form-control" id="quest10">
                         <option>1 (Strongly Disagree)</option>
                         <option>2</option>
                         <option>3</option>
@@ -161,7 +160,102 @@
                 </div>
             </div>
 			<button type="button" class="btn btn-success btn-block" id="submit">Choose my destiny</button>
-		    </form>
-         </div>
+		</form>
+		<!-- Modal -->
+        <div class="modal fade" id="friend-modal" role="dialog">
+        <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"></h4>
+        </div>
+        <div class="modal-body">
+        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    </div>
+        <div class="footer">
+            <p>Joe Finnegan</p>
+            <p>Code Bootcamp 2018</p>
+        </div>
+    </div>
+        <script type="text/javascript">
+            $('#submit').on("click", function(){
+                //check to make sure the form is filled out
+                var validEntry;
+                if($("#name").val().trim() === ''){
+                    alert('Please enter a name');
+                }
+                else if($("#pic").val().trim() === ''){
+                    alert('Please enter a link to photo');
+                }
+                else{
+                    //empty array to hold the value from the quiz questions
+                    var answerArray = [];
+                    //loop to push the answers from quiz to the array (NEED TO UPDATE i< AS QUESTIONS ARE ADDED)
+                    for(i=1; i<11; i++){
+                        console.log('#quest' + i)
+                        answerArray.push(parseInt($('#quest' + i).val().substring(0,1)));
+                    }
+                    //creating an object to hold the newly entered information
+                    var newFriend = 
+                    {
+                        name: $("#name").val().trim(),
+                        photo: $("#pic").val().trim(),
+                        scores: answerArray
+                    };
+                    //records the current location (should work after deployment)
+                    var currentURL = window.location.origin;
+                    //add the newly entered information to the friend array
+                    $.post(currentURL + "/api/friends", newFriend,
+                    function(data){});
+                    //access our array of potential friends so we can analyze it for the best match
+                    $.ajax({url: currentURL + "/api/friends", method: "GET"}).done(function(res){
+                            
+                        var futureLove;
+                        var currentBest = 100;
+                        var differenceArray = [];
+                        //loops through all friends with the exception of the one just created
+                        for(i=0; i < res.length - 1; i++){
+                            //compares the values from the quiz questions and pushes the absolute value of the differences to the difference array
+                            for(j=0; j<10; j++){
+                                var currentDifference = newFriend.scores[j] - res[i].scores[j];
+                                differenceArray.push(Math.abs(currentDifference));
+                            }
+                            //adds the values in the array to give a single value that represents the difference between a potential friend and the current entry
+                            var difference = differenceArray.reduce(add, 0);
+                            //if the difference is less than any of the previous comparisons, push the current profile to the best match position
+                            if(difference < currentBest){
+                                futureLove = res[i];
+                                currentBest = difference;
+                                differenceArray = [];
+                            }
+                            //or just move on
+                            else{
+                                differenceArray =[];
+                            }
+                            
+                        }
+                        // set up the display for the modal
+                        var loveName = '<h4>' + futureLove.name + '<h4>';
+                        var lovePic = '<img width="300px" src=' + futureLove.photo + '>';
+                        // use jQuery to show the modal sections
+                        $('#friend-modal').modal('show');
+                        $('#friend-modal h4').html(loveName);
+                        $('.modal-body').html(lovePic);
+                        //lear the entries
+                        $('#quiz')[0].reset();
+                    });
+                }
+                return false;
+            });
+    function add(a, b){
+         return a+b;
+        };
+        </script>        
     </body>
 </html>
