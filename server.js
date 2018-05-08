@@ -7,7 +7,8 @@ const path = require('path');
 
 // start express
 var app = express();
-var PORT = 3000;
+// heroku wants to be able to control the port 
+var PORT = process.env.PORT || 3000;
 
 // bodyparser nonsense
 app.use(bodyParser.json());
@@ -22,5 +23,5 @@ require('./app/routing/htmlroutes.js')(app);
 // start the actual server 
 
 app.listen(process.env.PORT || 3000, function(){
-	console.log('The application has been started and is now listening on PORT ' + PORT);
+	console.log('The application has been started and is now listening on PORT ' + process.env.PORT);
 });
