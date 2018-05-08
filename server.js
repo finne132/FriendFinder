@@ -17,8 +17,8 @@ app.use(bodyParser.text());
 app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
 // bring in the two routing files 
-require('./app/routing/apiroutes.js')(app); 
-require('./app/routing/htmlroutes.js')(app);
+require('/app/routing/apiroutes.js')(app); 
+require('/app/routing/htmlroutes.js')(app);
 
 // start the actual server 
 
